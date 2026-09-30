@@ -1,0 +1,234 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f7fb;
+    color: #222;
+}
+
+header {
+    background: #172554;
+    color: white;
+    padding: 18px 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h2 {
+    font-size: 22px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: bold;
+}
+
+.hero {
+    background: linear-gradient(135deg, #2563eb, #7c3aed);
+    color: white;
+    text-align: center;
+    padding: 90px 20px;
+}
+
+.hero h1 {
+    font-size: 45px;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    font-size: 19px;
+    margin-bottom: 25px;
+}
+
+button {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 12px 22px;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.hero button {
+    background: white;
+    color: #2563eb;
+}
+
+section {
+    padding: 55px 8%;
+    text-align: center;
+}
+
+section h2 {
+    font-size: 30px;
+    margin-bottom: 30px;
+}
+
+.cards {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.card {
+    background: white;
+    width: 280px;
+    padding: 30px 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.10);
+}
+
+.card h3 {
+    margin-bottom: 15px;
+}
+
+.card p {
+    color: #555;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+#resume {
+    background: #eaf0ff;
+}
+
+footer {
+    background: #172554;
+    color: white;
+    text-align: center;
+    padding: 25px;
+}
+
+@media (max-width: 700px) {
+
+    header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    nav a {
+        margin: 5px;
+    }
+
+    .hero h1 {
+        font-size: 32px;
+    }
+}
+.resume-form {
+    max-width: 600px;
+    margin: auto;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.10);
+}
+
+.resume-form input,
+.resume-form textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+.resume-form textarea {
+    height: 100px;
+    resize: none;
+}
+
+#resumeResult {
+    max-width: 700px;
+    margin: 30px auto;
+    text-align: left;
+}
+@media print {
+
+    body * {
+        visibility: hidden;
+    }
+
+    #resumeResult,
+    #resumeResult * {
+        visibility: visible;
+    }
+
+    #resumeResult {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        margin: 0;
+        padding: 30px;
+    }
+
+}
+.apply-box {
+    display: none;
+    max-width: 600px;
+    margin: 30px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.10);
+}
+
+.apply-box input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+}
+#dashboard {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+#dashboard .card {
+    display: inline-block;
+    width: 220px;
+    margin: 10px;
+    vertical-align: top;
+}
+
+#dashboard button {
+    margin-top: 10px;
+}
+.home-buttons {
+    margin-top: 25px;
+}
+
+.home-buttons button {
+    margin: 8px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+}
+@media (max-width: 600px) {
+
+    .home-buttons button {
+        display: block;
+        width: 90%;
+        margin: 10px auto;
+    }
+
+    #dashboard .card {
+        display: block;
+        width: 90%;
+        margin: 15px auto;
+    }
+}

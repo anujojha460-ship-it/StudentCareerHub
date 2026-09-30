@@ -1,0 +1,412 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Career Hub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <h2>🎓 Student Career Hub</h2>
+<div class="home-buttons">
+    <button onclick="document.getElementById('jobs').scrollIntoView({behavior:'smooth'})">
+        🔎 Search Jobs
+    </button>
+
+    <button onclick="document.getElementById('jobs').scrollIntoView({behavior:'smooth'})">
+        💼 Find Jobs
+    </button>
+
+    <button onclick="document.getElementById('resume').scrollIntoView({behavior:'smooth'})">
+        📄 Build Resume
+    </button>
+
+    <button onclick="document.getElementById('status').scrollIntoView({behavior:'smooth'})">
+        📊 Track Application
+    </button>
+</div>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#jobs">Jobs</a>
+        <a href="#tools">Tools</a>
+        <a href="#resume">Resume</a>
+<a href="#dashboard">📊 Dashboard</a>
+    </nav>
+</header>
+
+<section class="hero" id="home">
+    <h1>Build Your Career 🚀</h1>
+    <p>Jobs, Career Tools, Resume & Interview Preparation</p>
+    <button onclick="showMessage()">Explore Now</button>
+</section>
+
+<section id="jobs">
+<div class="job-search">
+
+    <input
+        type="text"
+        id="jobSearch"
+        placeholder="🔎 Search job...">
+    
+    <select id="jobCategory">
+        <option value="all">All Jobs</option>
+        <option value="it">IT Jobs</option>
+        <option value="government">Government Jobs</option>
+        <option value="sales">Sales Jobs</option>
+        <option value="internship">Internships</option>
+    </select>
+
+    <button onclick="searchJobs()">Search</button>
+
+</div>
+
+    <h2>🔥 Latest Job Opportunities</h2>
+
+    <div class="card">
+    <h3>💻 Software Developer</h3>
+
+    <p><b>🏢 Company:</b> ABC Technologies</p>
+    <p><b>💼 Job Type:</b> Full Time</p>
+    <p><b>📍 Location:</b> India</p>
+    <p><b>🎓 Eligibility:</b> B.Tech / BCA / MCA / Any Graduate</p>
+    <p><b>💰 Salary:</b> ₹3 LPA – ₹6 LPA</p>
+
+    <p>
+        <b>📝 Description:</b>
+        Work on software development, testing and maintenance.
+        Freshers can apply.
+    </p>
+
+    <button onclick="showJobDetails('Software Developer')">
+        View Details
+    </button><button onclick="document.getElementById('applyForm').style.display='block'; document.getElementById('applyJobName').value='Software Developer'; document.getElementById('applyForm').scrollIntoView({behavior:'smooth'});">
+    Apply Now
+</button>
+
+    </div>
+               <div class="card">
+    <h3>🎯 Business Associate</h3>
+<div class="card">
+    <h3>📱 Digital Marketing Intern</h3>
+
+    <p><b>🏢 Company:</b> Digital India</p>
+    <p><b>💼 Job Type:</b> Internship</p>
+    <p><b>📍 Location:</b> Remote</p>
+    <p><b>🎓 Eligibility:</b> Any Graduate / BBA / MBA / B.Tech</p>
+    <p><b>💰 Stipend:</b> ₹8,000 – ₹15,000 / Month</p>
+
+    <p>
+        <b>📝 Description:</b>
+        Work on social media, content creation,
+        digital marketing campaigns and online promotion.
+        Freshers can apply.
+    </p>
+
+    <button onclick="showJobDetails('Digital Marketing Intern')">
+        View Details
+    </button>
+
+    <button onclick="document.getElementById('applyForm').style.display='block'; document.getElementById('applyJobName').value='Digital Marketing Intern'; document.getElementById('applyForm').scrollIntoView({behavior:'smooth'});">
+        Apply Now
+    </button>
+</div>
+
+    <p><b>🏢 Company:</b> XYZ Services</p>
+    <p><b>💼 Job Type:</b> Full Time</p>
+    <p><b>📍 Location:</b> India</p>
+    <p><b>🎓 Eligibility:</b> Any Graduate / BBA / MBA</p>
+    <p><b>💰 Salary:</b> ₹2.5 LPA – ₹5 LPA</p>
+
+    <p>
+        <b>📝 Description:</b>
+        Handle customer communication, business operations
+        and support activities. Freshers can apply.
+    </p>
+
+    function showJobDetails(jobName) {
+
+    if (jobName === "Software Developer") {
+
+        alert(
+            "💻 Software Developer\n\n" +
+            "🏢 Company: ABC Technologies\n" +
+            "💼 Job Type: Full Time\n" +
+            "📍 Location: India\n" +
+            "🎓 Eligibility: B.Tech / BCA / MCA / Any Graduate\n" +
+            "💰 Salary: ₹3 LPA - ₹6 LPA\n\n" +
+            "📝 Description:\n" +
+            "Work on software development, testing and maintenance.\n" +
+            "Freshers can apply."
+        );
+
+    } else if (jobName === "Business Associate") {
+
+        alert(
+            "🎯 Business Associate\n\n" +
+            "🏢 Company: XYZ Services\n" +
+            "💼 Job Type: Full Time\n" +
+            "📍 Location: India\n" +
+            "🎓 Eligibility: Any Graduate / BBA / MBA\n" +
+            "💰 Salary: ₹2.5 LPA - ₹5 LPA\n\n" +
+            "📝 Description:\n" +
+            "Handle customer communication, business operations\n" +
+            "and support activities."
+        );
+
+    } else if (jobName === "Digital Marketing Intern") {
+
+        alert(
+            "📱 Digital Marketing Intern\n\n" +
+            "🏢 Company: Digital India\n" +
+            "💼 Job Type: Internship\n" +
+            "📍 Location: Remote\n" +
+            "🎓 Eligibility: Any Graduate / BBA / MBA / B.Tech\n" +
+            "💰 Stipend: ₹8,000 - ₹15,000 / Month\n\n" +
+            "📝 Description:\n" +
+            "Work on social media, content creation and\n" +
+            "digital marketing campaigns."
+        );
+    }
+}</div>
+       <div class="card">
+    <h3>📱 Digital Marketing Intern</h3>
+
+    <p><b>🏢 Company:</b> Digital India</p>
+    <p><b>💼 Job Type:</b> Internship</p>
+    <p><b>📍 Location:</b> Remote</p>
+    <p><b>🎓 Eligibility:</b> Any Graduate / BBA / MBA / B.Tech</p>
+    <p><b>💰 Stipend:</b> ₹8,000 – ₹15,000 / Month</p>
+
+    <p>
+        <b>📝 Description:</b>
+        Work on social media, content creation, digital marketing
+        campaigns and online promotion. Freshers can apply.
+    </p>
+
+    <button onclick="showJobDetails('Digital Marketing Intern')">
+        View Details
+    </button>
+
+    <button onclick="applyJob('Digital Marketing Intern')">
+        Apply Now
+    </button>
+</div>
+
+    </div>
+
+</section>
+
+<section id="tools">
+
+    <h2>🧮 Student Tools</h2>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>Percentage Calculator</h3>
+            <p>Calculate your percentage.</p>
+            <button onclick="percentage()">Calculate</button>
+        </div>
+
+        <div class="card">
+            <h3>CGPA Calculator</h3>
+            <p>Convert CGPA into percentage.</p>
+            <button onclick="cgpa()">Calculate</button>
+        </div>
+
+        <div class="card">
+            <h3>Attendance Calculator</h3>
+            <p>Check your attendance.</p>
+            <button onclick="attendance()">Calculate</button>
+        </div>
+
+    </div>
+
+</section>
+<section id="resume">
+
+    <h2>📄 Resume Builder</h2>
+
+    <div class="resume-form">
+
+        <input type="text" id="name" placeholder="Enter Your Name">
+        <input type="text" id="phone" placeholder="Enter Mobile Number">
+        <input type="email" id="email" placeholder="Enter Email">
+
+        <input type="text" id="education" placeholder="Enter Education">
+
+        <input type="text" id="skills" placeholder="Enter Skills">
+
+        <textarea id="experience" placeholder="Enter Experience"></textarea>
+
+        <button onclick="generateResume()">
+            Generate Resume
+        </button>
+<button onclick="downloadResume()">
+    Download Resume
+</button>
+    </div>
+
+    <div id="resumeResult"></div>
+
+</section>
+
+</section>
+
+<footer>
+    <p>© 2026 Student Career Hub</p>
+</footer>
+
+<script src="script.js"></script>
+<div id="applyForm" class="apply-box">
+
+    <h2>📝 Apply for Job</h2>
+
+    <input type="text" id="applyName" placeholder="Your Name">
+
+    <input type="email" id="applyEmail" placeholder="Your Email">
+
+    <input type="text" id="applyPhone" placeholder="Mobile Number">
+
+    <input type="text" id="applyJobName" readonly>
+
+    <button onclick="submitApplication()">
+        Submit Application
+    </button>
+
+</div>
+<section id="applications">
+
+    <h2>📋 Applications Dashboard</h2>
+<section id="status">
+    <h2>📊 Check Application Status</h2>
+<section id="profile">
+<section id="dashboard">
+    <h2>📊 Student Dashboard</h2>
+
+    <div class="card">
+        <h3>👤 My Profile</h3>
+        <p>View and manage your student profile.</p>
+        <button onclick="document.getElementById('profile').scrollIntoView({behavior:'smooth'})">
+            Open Profile
+        </button>
+    </div>
+
+    <div class="card">
+        <h3>📋 My Applications</h3>
+        <p>View your submitted job applications.</p>
+        <button onclick="showApplicationCount()">
+    📋 Application Count
+</button>
+    </div>
+
+    <div class="card">
+        <h3>📊 Application Status</h3>
+        <p>Check your application status.</p>
+        <button onclick="document.getElementById('status').scrollIntoView({behavior:'smooth'})">
+            Check Status
+        </button>
+    </div>
+
+    <div class="card">
+        <h3>📄 Resume</h3>
+        <p>Create your professional resume.</p>
+        <button onclick="document.getElementById('resume').scrollIntoView({behavior:'smooth'})">
+            Open Resume Builder
+        </button>
+    </div>
+</section>
+    <h2>👤 Student Profile</h2>
+<button onclick="loadProfile()">
+    ✏️ Edit / Load Profile
+</button>
+
+<button onclick="clearProfile()">
+    🗑️ Clear Profile
+</button>
+    <div class="resume-form">
+        <input type="text" id="profileName" placeholder="Your Name">
+
+        <input type="text" id="profilePhone" placeholder="Mobile Number">
+
+        <input type="email" id="profileEmail" placeholder="Email">
+
+        <input type="text" id="profileEducation"
+               placeholder="Education">
+
+        <input type="text" id="profileSkills"
+               placeholder="Skills">
+
+        <button onclick="saveProfile()">
+            💾 Save Profile
+        </button>
+    </div>
+
+    <div id="profileMessage"></div>
+</section>
+    <div class="resume-form">
+        <input
+            type="text"
+            id="statusApplicationId"
+            placeholder="Enter Application ID (e.g. SCH-1001)"
+        >
+
+        <button onclick="checkApplicationStatus()">
+            🔍 Check Status
+        </button>
+    </div>
+
+    <div id="statusResult"></div>
+</section>
+<div id="adminDashboard" class="card" style="display:none;">
+    <h2>👨‍💼 Admin Dashboard</h2>
+    <p>Welcome Admin! You can manage student applications here.</p>
+
+   <button onclick="showAdminApplications()">
+    📋 View Applications
+</button>
+</div>
+
+    <button onclick="showApplications()">
+        View Submitted Applications
+    </button>
+
+    <div id="applicationList"></div>
+
+</section>
+<section id="admin">
+
+    <h2>🔐 Admin Login</h2>
+
+    <div class="resume-form">
+
+        <input
+            type="text"
+            id="adminUsername"
+            placeholder="Admin Username">
+
+        <input
+            type="password"
+            id="adminPassword"
+            placeholder="Admin Password">
+
+        <button onclick="adminLogin()">
+            Login
+        </button>
+
+    </div>
+
+    <p id="loginMessage"></p>
+
+</section>
+<footer>
+    <h3>🎓 Student Career Hub</h3>
+    <p>Helping Students Find Jobs, Build Resumes & Track Applications.</p>
+    <p>© 2026 Student Career Hub | All Rights Reserved</p>
+</footer>
+</body>
+</html>
