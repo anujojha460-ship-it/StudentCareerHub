@@ -70,9 +70,12 @@ function generateResume() {
 function downloadResume() {
     window.print();
 }
-function searchJobs() {
+ 
+ function searchJobs(){
     let search = document.getElementById("jobSearch").value.toLowerCase();
     let category = document.getElementById("jobCategory").value;
+    let location = document.getElementById("jobLocation").value;
+
     let jobs = document.querySelectorAll("#jobs .card");
 
     jobs.forEach(function(job) {
@@ -82,34 +85,48 @@ function searchJobs() {
         let searchMatch = text.includes(search);
 
         let categoryMatch = true;
+        let locationMatch = true;
 
         if (category === "it") {
-            categoryMatch =
-                text.includes("software developer");
+            categoryMatch = text.includes("software developer");
         }
 
         if (category === "government") {
-            categoryMatch =
-                text.includes("government");
+            categoryMatch = text.includes("government");
         }
 
         if (category === "sales") {
-            categoryMatch =
-                text.includes("business associate");
+            categoryMatch = text.includes("business associate");
         }
 
         if (category === "internship") {
-            categoryMatch =
-                text.includes("digital marketing intern");
+            categoryMatch = text.includes("digital marketing intern");
         }
 
-        if (searchMatch && categoryMatch) {
+        if (location === "remote") {
+            locationMatch = text.includes("remote");
+        }
+
+        if (location === "bhopal") {
+            locationMatch = text.includes("bhopal");
+        }
+
+        if (location === "indore") {
+            locationMatch = text.includes("indore");
+        }
+
+        if (location === "delhi") {
+            locationMatch = text.includes("delhi");
+        }
+
+        if (searchMatch && categoryMatch && locationMatch) {
             job.style.display = "block";
         } else {
             job.style.display = "none";
         }
     });
 }
+
 function showJobDetails(jobName) {
     alert(
         "Job: " + jobName +
@@ -295,7 +312,10 @@ function updateApplicationStatus(index, status) {
         alert("Application status updated! ✅");
     }
 }
-function saveProfile() {
+ function saveProfile() {
+
+    let photo = document.getElementById("profilePhoto").files[0];
+
     let profile = {
         name: document.getElementById("profileName").value,
         phone: document.getElementById("profilePhone").value,
@@ -314,29 +334,28 @@ function saveProfile() {
         JSON.stringify(profile)
     );
 
-    document.getElementById("profileMessage").innerHTML = `
-        <div class="card">
-            <h3>✅ Profile Saved Successfully!</h3>
-            <p>Your profile has been saved successfully.</p>
-        </div>
-    `;
-}
-function loadProfile() {
-    let profile =
-        JSON.parse(localStorage.getItem("studentProfile"));
+    if (photo) {
 
-    if (!profile) {
-        return;
+        let reader = new FileReader();
+
+        reader.onload = function () {
+
+            localStorage.setItem(
+                "profilePhoto",
+                reader.result
+            );
+
+            let img = document.getElementById("profilePhotoPreview");
+
+            img.src = reader.result;
+            img.style.display = "block";
+        };
+
+        reader.readAsDataURL(photo);
     }
 
-    document.getElementById("profileName").value = profile.name || "";
-    document.getElementById("profilePhone").value = profile.phone || "";
-    document.getElementById("profileEmail").value = profile.email || "";
-    document.getElementById("profileEducation").value = profile.education || "";
-    document.getElementById("profileSkills").value = profile.skills || "";
+    alert("Profile Saved Successfully! ✅");
 }
-
-window.onload = loadProfile;
 function clearProfile() {
     localStorage.removeItem("studentProfile");
 
@@ -346,8 +365,7 @@ function clearProfile() {
     document.getElementById("profileEducation").value = "";
     document.getElementById("profileSkills").value = "";
 
-    document.getElementById("profileMessage").innerHTML =
-        "<div class='card'><h3>🗑️ Profile Cleared</h3></div>";
+    alert("Profile Cleared! 🗑️");
 }
 function showApplicationCount() {
     let applications =
@@ -355,12 +373,26 @@ function showApplicationCount() {
 
     alert("📋 Total Applications: " + applications.length);
 }
-function applyJob(jobName) {
-    document.getElementById("applyForm").style.display = "block";
+function subscribeJobAlert() {
+    let email = document.getElementById("alertEmail").value.trim();
 
-    document.getElementById("applyJobName").value = jobName;
+    if (email === "") {
+        alert("Please enter your email.");
+        return;
+    }
 
-    document.getElementById("applyForm").scrollIntoView({
-        behavior: "smooth"
-    });
+    localStorage.setItem("jobAlertEmail", email);
+
+    document.getElementById("alertMessage").innerHTML =
+        "<div class='card'><h3>✅ Subscribed Successfully!</h3><p>You will receive new job updates.</p></div>";
+
+    document.getElementById("alertEmail").value = "";
+}
+function showService(serviceName) {
+    document.getElementById("serviceMessage").innerHTML =
+        "<div class='card'>" +
+        "<h3>✅ " + serviceName + "</h3>" +
+        "<p>Service selected successfully.</p>" +
+        "<button onclick=\"alert('We will contact you soon!')\">Continue</button>" +
+        "</div>";
 }

@@ -59,6 +59,13 @@
         <option value="sales">Sales Jobs</option>
         <option value="internship">Internships</option>
     </select>
+<select id="jobLocation">
+    <option value="all">📍 All Locations</option>
+    <option value="remote">Remote</option>
+    <option value="bhopal">Bhopal</option>
+    <option value="indore">Indore</option>
+    <option value="delhi">Delhi</option>
+</select>
 
     <button onclick="searchJobs()">Search</button>
 
@@ -126,7 +133,7 @@
         Handle customer communication, business operations
         and support activities. Freshers can apply.
     </p>
-
+<script>
     function showJobDetails(jobName) {
 
     if (jobName === "Software Developer") {
@@ -170,8 +177,9 @@
             "Work on social media, content creation and\n" +
             "digital marketing campaigns."
         );
-    }
-}</div>
+   }
+}
+</script>
        <div class="card">
     <h3>📱 Digital Marketing Intern</h3>
 
@@ -320,34 +328,6 @@
         </button>
     </div>
 </section>
-    <h2>👤 Student Profile</h2>
-<button onclick="loadProfile()">
-    ✏️ Edit / Load Profile
-</button>
-
-<button onclick="clearProfile()">
-    🗑️ Clear Profile
-</button>
-    <div class="resume-form">
-        <input type="text" id="profileName" placeholder="Your Name">
-
-        <input type="text" id="profilePhone" placeholder="Mobile Number">
-
-        <input type="email" id="profileEmail" placeholder="Email">
-
-        <input type="text" id="profileEducation"
-               placeholder="Education">
-
-        <input type="text" id="profileSkills"
-               placeholder="Skills">
-
-        <button onclick="saveProfile()">
-            💾 Save Profile
-        </button>
-    </div>
-
-    <div id="profileMessage"></div>
-</section>
     <div class="resume-form">
         <input
             type="text"
@@ -408,5 +388,193 @@
     <p>Helping Students Find Jobs, Build Resumes & Track Applications.</p>
     <p>© 2026 Student Career Hub | All Rights Reserved</p>
 </footer>
+<section id="profile">
+    <h2>👤 Student Profile</h2>
+
+    <div class="resume-form">
+
+        <input type="file" id="profilePhoto" accept="image/*">
+
+        <img id="profilePhotoPreview">
+             src=""
+             alt="Profile Photo"
+            style="width:120px;height:120px;border-radius:50%;object-fit:cover;display:none;margin:10px 0;"
+
+        <input type="text" id="profileName" placeholder="Your Name">
+
+        <input type="text" id="profilePhone" placeholder="Mobile Number">
+
+        <input type="email" id="profileEmail" placeholder="Email">
+
+        <input type="text" id="profileEducation" placeholder="Education">
+
+        <input type="text" id="profileSkills" placeholder="Skills">
+
+ <button type="button" onclick="saveStudentProfile()">💾 Save Profile</button>
+<script>
+function saveStudentProfile() {
+    let name = document.getElementById("profileName").value;
+    let phone = document.getElementById("profilePhone").value;
+    let email = document.getElementById("profileEmail").value;
+    let education = document.getElementById("profileEducation").value;
+    let skills = document.getElementById("profileSkills").value;
+
+    if (!name || !phone || !email) {
+        alert("Please fill Name, Mobile and Email.");
+        return;
+    }
+
+    let profile = {
+        name: name,
+        phone: phone,
+        email: email,
+        education: education,
+        skills: skills
+    };
+
+    localStorage.setItem("studentProfile", JSON.stringify(profile));
+document.getElementById("dashboardName").textContent = name;
+document.getElementById("dashboardEducation").textContent = education || "Not Saved";
+document.getElementById("dashboardSkills").textContent = skills || "Not Saved";
+document.getElementById("dashboardPhone").textContent = phone;
+document.getElementById("dashboardEmail").textContent = email;
+
+    let photo = document.getElementById("profilePhoto").files[0];
+
+    if (photo) {
+        let reader = new FileReader();
+
+        reader.onload = function() {
+            localStorage.setItem("profilePhoto", reader.result);
+
+            let img = document.getElementById("profilePhotoPreview");
+            img.src = reader.result;
+            img.style.display = "block";
+let dashboardPhoto = document.getElementById("dashboardPhoto");
+dashboardPhoto.src = reader.result;
+dashboardPhoto.style.display = "block";
+        };
+
+        reader.readAsDataURL(photo);
+    }
+
+    alert("Profile Saved Successfully! ✅");
+}
+</script>
+
+        <button onclick="loadProfile()">✏️ Load Profile</button>
+
+        <button onclick="clearProfile()">🗑️ Clear Profile</button>
+
+    </div>
+
+    <div id="profileMessage"></div>
+</section>
+<section id="dashboard">
+    <h2>📊 Student Dashboard</h2>
+<div class="card" id="dashboardProfile">
+    <h3>👤 My Profile</h3>
+
+    <img id="dashboardPhoto"
+         src=""
+         style="width:100px;height:100px;border-radius:50%;object-fit:cover;display:none;">
+
+    <p><b>Name:</b> <span id="dashboardName">Not Saved</span></p>
+<p><b>Mobile:</b> <span id="dashboardPhone">Not Saved</span></p>
+<p><b>Mobile:</b> <span id="dashboardPhone">Not Saved</span></p>
+<p><b>Email:</b> <span id="dashboardEmail">Not Saved</span></p>
+<p><b>Email:</b> <span id="dashboardEmail">Not Saved</span></p>
+    <p><b>Education:</b> <span id="dashboardEducation">Not Saved</span></p>
+    <p><b>Skills:</b> <span id="dashboardSkills">Not Saved</span></p>
+</div>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>👤 My Profile</h3>
+            <p>Manage your student profile.</p>
+            <button onclick="document.getElementById('profile').scrollIntoView({behavior:'smooth'})">
+                Open Profile
+            </button>
+        </div>
+
+        <div class="card">
+            <h3>📋 My Applications</h3>
+            <p>Check your submitted applications.</p>
+            <button onclick="showApplicationCount()">
+                View Applications
+            </button>
+        </div>
+
+        <div class="card">
+            <h3>📊 Application Status</h3>
+            <p>Track your job application.</p>
+            <button onclick="document.getElementById('status').scrollIntoView({behavior:'smooth'})">
+                Check Status
+            </button>
+        </div>
+
+        <div class="card">
+            <h3>📄 Resume</h3>
+            <p>Create your professional resume.</p>
+            <button onclick="document.getElementById('resume').scrollIntoView({behavior:'smooth'})">
+                Open Resume
+            </button>
+        </div>
+
+    </div>
+</section>
+<section id="jobAlerts">
+    <h2>🔔 Job Alerts</h2>
+
+    <div class="resume-form">
+        <p>Get updates about new jobs.</p>
+
+        <input
+            type="email"
+            id="alertEmail"
+            placeholder="Enter your email"
+        >
+
+        <button onclick="subscribeJobAlert()">
+            🔔 Subscribe
+        </button>
+    </div>
+
+    <div id="alertMessage"></div>
+</section>
+<section id="premium">
+    <h2>💼 Career Services</h2>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>📄 Professional Resume</h3>
+            <p>Create a professional, job-ready resume.</p>
+            <button onclick="showService('Professional Resume')">
+                Get Service
+            </button>
+        </div>
+
+        <div class="card">
+            <h3>📝 Resume Editing</h3>
+            <p>Improve your resume for job applications.</p>
+            <button onclick="showService('Resume Editing')">
+                Get Service
+            </button>
+        </div>
+
+        <div class="card">
+            <h3>🎯 Interview Preparation</h3>
+            <p>Prepare for HR and technical interviews.</p>
+            <button onclick="showService('Interview Preparation')">
+                Get Service
+            </button>
+        </div>
+
+    </div>
+
+    <div id="serviceMessage"></div>
+</section>
 </body>
 </html>
