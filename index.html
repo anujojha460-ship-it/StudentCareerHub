@@ -550,10 +550,14 @@ dashboardPhoto.style.display = "block";
 
         <div class="card">
             <h3>📄 Professional Resume</h3>
-            <p>Create a professional, job-ready resume.</p>
-            <button onclick="showService('Professional Resume')">
-                Get Service
-            </button>
+<p>Create a professional, job-ready resume.</p>
+
+<button onclick="startResumeService()">
+  💳 Get Resume for ₹49
+</button>
+
+<butto onclick="
+    
         </div>
 
         <div class="card">
@@ -576,5 +580,63 @@ dashboardPhoto.style.display = "block";
 
     <div id="serviceMessage"></div>
 </section>
+<!-- AI Career Assistant -->
+<section id="careerAssistant" class="card">
+  <h2>🤖 Career Assistant</h2>
+
+  <label>Education:</label>
+  <select id="careerEducation">
+    <option value="">Select</option>
+    <option value="btech">B.Tech / B.E.</option>
+    <option value="bba">BBA</option>
+    <option value="mba">MBA</option>
+    <option value="mca">MCA</option>
+  </select>
+
+  <label>Interest:</label>
+  <select id="careerInterest">
+    <option value="">Select</option>
+    <option value="coding">Coding / IT</option>
+    <option value="testing">Software Testing</option>
+    <option value="sales">Sales</option>
+    <option value="marketing">Digital Marketing</option>
+  </select>
+
+  <button onclick="getCareerSuggestion()">Get Career Suggestion</button>
+
+  <div id="careerResult"></div>
+</section>
+<div id="serviceForm" style="display:none;" class="card">
+  <h2>📩 Career Service Request</h2>
+
+  <input type="text" id="serviceName" placeholder="Enter your name">
+  <input type="text" id="serviceMobile" placeholder="Enter mobile number">
+
+  <select id="serviceType">
+    <option value="">Select Service</option>
+    <option value="Professional Resume">Professional Resume</option>
+    <option value="Resume Editing">Resume Editing</option>
+    <option value="Interview Preparation">Interview Preparation</option>
+  </select>
+
+  <button onclick="submitServiceRequest()">Submit Request</button>
+
+  <p id="serviceMessage"></p>
+</div>
+
+  <!-- ₹49 Payment Page -->
+<div id="paymentPage" class="card" style="display:none;">
+  <h2>💳 Resume Service Payment</h2>
+  <p><b>Professional Resume Service</b></p>
+  <h2>₹49</h2>
+  <p>UPI ID:</p>
+  <p><b>8516828733@ybl</b></p>
+
+  <button onclick="payResume()">
+    📱 Pay ₹49
+  </button>
+
+  <p id="paymentMessage"></p>
+</div>
 </body>
 </html>

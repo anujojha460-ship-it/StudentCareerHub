@@ -373,26 +373,34 @@ function showApplicationCount() {
 
     alert("📋 Total Applications: " + applications.length);
 }
-function subscribeJobAlert() {
-    let email = document.getElementById("alertEmail").value.trim();
+function submitServiceRequest() {
+  const name = document.getElementById("serviceName").value;
+  const mobile = document.getElementById("serviceMobile").value;
+  const service = document.getElementById("serviceType").value;
 
-    if (email === "") {
-        alert("Please enter your email.");
-        return;
-    }
-
-    localStorage.setItem("jobAlertEmail", email);
-
-    document.getElementById("alertMessage").innerHTML =
-        "<div class='card'><h3>✅ Subscribed Successfully!</h3><p>You will receive new job updates.</p></div>";
-
-    document.getElementById("alertEmail").value = "";
-}
-function showService(serviceName) {
+  if (!name || !mobile || !service) {
     document.getElementById("serviceMessage").innerHTML =
-        "<div class='card'>" +
-        "<h3>✅ " + serviceName + "</h3>" +
-        "<p>Service selected successfully.</p>" +
-        "<button onclick=\"alert('We will contact you soon!')\">Continue</button>" +
-        "</div>";
+      "Please fill all details.";
+    return;
+  }
+
+  const request = {
+    name: name,
+    mobile: mobile,
+    service: service
+  };
+
+  localStorage.setItem("careerServiceRequest", JSON.stringify(request));
+
+  document.getElementById("serviceMessage").innerHTML =
+    "✅ Request submitted successfully!";
+}
+function startResumeService() {
+  document.getElementById("paymentPage").style.display = "block";
+}
+function payResume() {
+  const upiUrl =
+    "upi://pay?pa=8516828733@ybl&pn=Student%20Career%20Hub&am=49&cu=INR";
+
+  window.location.href = upiUrl;
 }
