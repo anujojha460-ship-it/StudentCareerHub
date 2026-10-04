@@ -404,3 +404,12 @@ function payResume() {
 
   window.location.href = upiUrl;
 }
+function showResumeDetailsForm() {
+  document.getElementById("resumeDetailsForm").style.display = "block";
+}
+function submitResumeDetails() {
+  window.open(
+    "https://docs.google.com/forms/d/e/1FAIpQLSfX-xb0BNw0h1UEoZpKtJ9RkbQiBdbyey4zwKidHwLVV9jqng/viewform",
+    "_blank"
+  );
+}
