@@ -635,8 +635,28 @@ dashboardPhoto.style.display = "block";
   <button onclick="payResume()">
     📱 Pay ₹49
   </button>
-
+<button onclick="showResumeDetailsForm()">
+  ✅ I Have Paid
+</button>
   <p id="paymentMessage"></p>
+</div>
+<!-- Resume Details Form -->
+<div id="resumeDetailsForm" class="card" style="display:none;">
+  <h2>📄 Resume Details</h2>
+
+  <input type="text" id="resumeName" placeholder="Full Name">
+  <input type="text" id="resumeMobile" placeholder="Mobile Number">
+  <input type="email" id="resumeEmail" placeholder="Email Address">
+
+  <input type="text" id="resumeEducation" placeholder="Education">
+  <input type="text" id="resumeSkills" placeholder="Skills">
+  <textarea id="resumeProjects" placeholder="Projects"></textarea>
+
+  <button onclick="submitResumeDetails()">
+    📩 Submit Resume Details
+  </button>
+
+  <p id="resumeDetailsMessage"></p>
 </div>
 </body>
 </html>
