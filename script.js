@@ -35,42 +35,84 @@ function attendance() {
 function resume() {
     alert("Resume Builder is coming soon! 📄");
 }
-function generateResume() {
 
-    let name = document.getElementById("name").value;
-    let phone = document.getElementById("phone").value;
-    let email = document.getElementById("email").value;
-    let education = document.getElementById("education").value;
-    let skills = document.getElementById("skills").value;
-    let experience = document.getElementById("experience").value;
 
-    document.getElementById("resumeResult").innerHTML = `
-        <div class="card">
-            <h2>${name}</h2>
-            <p>📱 ${phone}</p>
-            <p>📧 ${email}</p>
-
-            <hr><br>
-
-            <h3>Education</h3>
-            <p>${education}</p>
-
-            <br>
-
-            <h3>Skills</h3>
-            <p>${skills}</p>
-
-            <br>
-
-            <h3>Experience</h3>
-            <p>${experience}</p>
-        </div>
-    `;
-}
 function downloadResume() {
     window.print();
 }
  
+function generateResume() {
+    const get = id => {
+        const el = document.getElementById(id);
+        return el ? el.value.trim() : "";
+    };
+
+    const name = get("name");
+    const phone = get("phone");
+    const email = get("email");
+
+    if (!name || !phone || !email) {
+        alert("Please enter your name, mobile number and email.");
+        return;
+    }
+
+    const sections = [
+        ["Career Objective", "objective"],
+        ["Education", "education"],
+        ["Class 12", "class12"],
+        ["Class 10", "class10"],
+        ["Technical Skills", "skills"],
+        ["Project Name", "projectTitle"],
+        ["Project Description", "projects"],
+        ["Internship / Experience", "experience"],
+        ["Certifications", "certifications"],
+        ["Achievements", "achievements"],
+        ["Languages", "languages"],
+        ["LinkedIn", "linkedin"],
+        ["GitHub", "github"]
+    ];
+
+    const safe = text => String(text).replace(/[&<>"']/g, c => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+    })[c]);
+
+    let html = `
+        <article class="professional-resume">
+            <header style="text-align:center;border-bottom:2px solid #234b70;padding-bottom:12px">
+                <h1>${safe(name)}</h1>
+                <p>${safe(phone)} | ${safe(email)}</p>
+                ${get("address") ? `<p>${safe(get("address"))}</p>` : ""}
+            </header>
+    `;
+
+    sections.forEach(([title, id]) => {
+        const value = get(id);
+
+        if (value) {
+            html += `
+                <section style="margin-top:14px">
+                    <h3 style="color:#234b70;border-bottom:1px solid #ccc;padding-bottom:4px">
+                        ${safe(title)}
+                    </h3>
+                    <p style="white-space:pre-wrap">${safe(value)}</p>
+                </section>
+            `;
+        }
+    });
+
+    html += "</article>";
+
+    document.getElementById("resumeResult").innerHTML = html;
+
+    document.getElementById("resumeResult").scrollIntoView({
+        behavior: "smooth"
+    });
+}
+
  function searchJobs(){
     let search = document.getElementById("jobSearch").value.toLowerCase();
     let category = document.getElementById("jobCategory").value;

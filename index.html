@@ -97,43 +97,26 @@
     </div>
                <div class="card">
     <h3>🎯 Business Associate</h3>
-<div class="card">
-    <h3>📱 Digital Marketing Intern</h3>
-
-    <p><b>🏢 Company:</b> Digital India</p>
-    <p><b>💼 Job Type:</b> Internship</p>
-    <p><b>📍 Location:</b> Remote</p>
-    <p><b>🎓 Eligibility:</b> Any Graduate / BBA / MBA / B.Tech</p>
-    <p><b>💰 Stipend:</b> ₹8,000 – ₹15,000 / Month</p>
-
-    <p>
-        <b>📝 Description:</b>
-        Work on social media, content creation,
-        digital marketing campaigns and online promotion.
-        Freshers can apply.
-    </p>
-
-    <button onclick="showJobDetails('Digital Marketing Intern')">
-        View Details
-    </button>
-
-    <button onclick="document.getElementById('applyForm').style.display='block'; document.getElementById('applyJobName').value='Digital Marketing Intern'; document.getElementById('applyForm').scrollIntoView({behavior:'smooth'});">
-        Apply Now
-    </button>
-</div>
+    </div>
 
     <p><b>🏢 Company:</b> XYZ Services</p>
     <p><b>💼 Job Type:</b> Full Time</p>
     <p><b>📍 Location:</b> India</p>
     <p><b>🎓 Eligibility:</b> Any Graduate / BBA / MBA</p>
     <p><b>💰 Salary:</b> ₹2.5 LPA – ₹5 LPA</p>
+<p><b>📝 Description:</b>
+Handle customer communication, business operations and support activities.
+Freshers can apply.
+</p>
+<button onclick="showJobDetails('Business Associate')">
+    View Details
+</button>
 
+<button onclick="applyJob('Business Associate')">
+    Apply Now
+</button>
     <p>
-        <b>📝 Description:</b>
-        Handle customer communication, business operations
-        and support activities. Freshers can apply.
-    </p>
-<script>
+       <script>
     function showJobDetails(jobName) {
 
     if (jobName === "Software Developer") {
@@ -239,25 +222,54 @@
 
     <h2>📄 Resume Builder</h2>
 
-    <div class="resume-form">
+   
+<div class="resume-form">
 
-        <input type="text" id="name" placeholder="Enter Your Name">
-        <input type="text" id="phone" placeholder="Enter Mobile Number">
-        <input type="email" id="email" placeholder="Enter Email">
+    <h3>Personal Details</h3>
+    <input type="text" id="name" placeholder="Full Name">
+    <input type="text" id="phone" placeholder="Mobile Number">
+    <input type="email" id="email" placeholder="Email Address">
+    <input type="text" id="address" placeholder="City, State">
 
-        <input type="text" id="education" placeholder="Enter Education">
+    <h3>Career Objective</h3>
+    <textarea id="objective" placeholder="Career Objective"></textarea>
 
-        <input type="text" id="skills" placeholder="Enter Skills">
+    <h3>Education</h3>
+    <input type="text" id="education" placeholder="Graduation / Degree, College, Year, CGPA">
+    <input type="text" id="class12" placeholder="Class 12: School, Board, Year, Percentage">
+    <input type="text" id="class10" placeholder="Class 10: School, Board, Year, Percentage">
 
-        <textarea id="experience" placeholder="Enter Experience"></textarea>
+    <h3>Technical Skills</h3>
+    <textarea id="skills" placeholder="C, C++, Java, HTML, CSS, SQL, etc."></textarea>
 
-        <button onclick="generateResume()">
-            Generate Resume
-        </button>
-<button onclick="downloadResume()">
-    Download Resume
-</button>
-    </div>
+    <h3>Projects</h3>
+    <input type="text" id="projectTitle" placeholder="Project Name">
+    <textarea id="projects" placeholder="Project Description and Technologies Used"></textarea>
+
+    <h3>Internship / Experience</h3>
+    <textarea id="experience" placeholder="Company, Role, Duration and Work Details (Optional)"></textarea>
+
+    <h3>Certifications</h3>
+    <textarea id="certifications" placeholder="Certification Name and Organization"></textarea>
+
+    <h3>Achievements</h3>
+    <textarea id="achievements" placeholder="Achievements and Activities (Optional)"></textarea>
+
+    <h3>Additional Information</h3>
+    <input type="text" id="languages" placeholder="Languages Known">
+    <input type="url" id="linkedin" placeholder="LinkedIn Profile (Optional)">
+    <input type="url" id="github" placeholder="GitHub Profile (Optional)">
+
+    <button type="button" onclick="generateResume()">
+        Generate Resume
+    </button>
+
+    <button type="button" onclick="downloadResume()">
+        Download Resume
+    </button>
+
+</div>
+
 
     <div id="resumeResult"></div>
 
@@ -289,11 +301,7 @@
 </div>
 <section id="applications">
 
-    <h2>📋 Applications Dashboard</h2>
-<section id="status">
-    <h2>📊 Check Application Status</h2>
-<section id="profile">
-<section id="dashboard">
+   
     <h2>📊 Student Dashboard</h2>
 
     <div class="card">
@@ -395,10 +403,10 @@
 
         <input type="file" id="profilePhoto" accept="image/*">
 
-        <img id="profilePhotoPreview">
-             src=""
-             alt="Profile Photo"
-            style="width:120px;height:120px;border-radius:50%;object-fit:cover;display:none;margin:10px 0;"
+        <img id="profilePhotoPreview"
+     src=""
+     alt="Profile Photo"
+     style="width:120px;height:120px;border-radius:50%;object-fit:cover;display:none;margin:10px 0;">
 
         <input type="text" id="profileName" placeholder="Your Name">
 
@@ -433,12 +441,6 @@ function saveStudentProfile() {
     };
 
     localStorage.setItem("studentProfile", JSON.stringify(profile));
-document.getElementById("dashboardName").textContent = name;
-document.getElementById("dashboardEducation").textContent = education || "Not Saved";
-document.getElementById("dashboardSkills").textContent = skills || "Not Saved";
-document.getElementById("dashboardPhone").textContent = phone;
-document.getElementById("dashboardEmail").textContent = email;
-
     let photo = document.getElementById("profilePhoto").files[0];
 
     if (photo) {
@@ -470,79 +472,6 @@ dashboardPhoto.style.display = "block";
 
     <div id="profileMessage"></div>
 </section>
-<section id="dashboard">
-    <h2>📊 Student Dashboard</h2>
-<div class="card" id="dashboardProfile">
-    <h3>👤 My Profile</h3>
-
-    <img id="dashboardPhoto"
-         src=""
-         style="width:100px;height:100px;border-radius:50%;object-fit:cover;display:none;">
-
-    <p><b>Name:</b> <span id="dashboardName">Not Saved</span></p>
-<p><b>Mobile:</b> <span id="dashboardPhone">Not Saved</span></p>
-<p><b>Mobile:</b> <span id="dashboardPhone">Not Saved</span></p>
-<p><b>Email:</b> <span id="dashboardEmail">Not Saved</span></p>
-<p><b>Email:</b> <span id="dashboardEmail">Not Saved</span></p>
-    <p><b>Education:</b> <span id="dashboardEducation">Not Saved</span></p>
-    <p><b>Skills:</b> <span id="dashboardSkills">Not Saved</span></p>
-</div>
-
-    <div class="cards">
-
-        <div class="card">
-            <h3>👤 My Profile</h3>
-            <p>Manage your student profile.</p>
-            <button onclick="document.getElementById('profile').scrollIntoView({behavior:'smooth'})">
-                Open Profile
-            </button>
-        </div>
-
-        <div class="card">
-            <h3>📋 My Applications</h3>
-            <p>Check your submitted applications.</p>
-            <button onclick="showApplicationCount()">
-                View Applications
-            </button>
-        </div>
-
-        <div class="card">
-            <h3>📊 Application Status</h3>
-            <p>Track your job application.</p>
-            <button onclick="document.getElementById('status').scrollIntoView({behavior:'smooth'})">
-                Check Status
-            </button>
-        </div>
-
-        <div class="card">
-            <h3>📄 Resume</h3>
-            <p>Create your professional resume.</p>
-            <button onclick="document.getElementById('resume').scrollIntoView({behavior:'smooth'})">
-                Open Resume
-            </button>
-        </div>
-
-    </div>
-</section>
-<section id="jobAlerts">
-    <h2>🔔 Job Alerts</h2>
-
-    <div class="resume-form">
-        <p>Get updates about new jobs.</p>
-
-        <input
-            type="email"
-            id="alertEmail"
-            placeholder="Enter your email"
-        >
-
-        <button onclick="subscribeJobAlert()">
-            🔔 Subscribe
-        </button>
-    </div>
-
-    <div id="alertMessage"></div>
-</section>
 <section id="premium">
     <h2>💼 Career Services</h2>
 
@@ -555,8 +484,6 @@ dashboardPhoto.style.display = "block";
 <button onclick="startResumeService()">
   💳 Get Resume for ₹49
 </button>
-
-<butto onclick="
     
         </div>
 
