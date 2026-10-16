@@ -1,4 +1,3 @@
-
 const categories = [
   {
     id: "it",
@@ -52,7 +51,7 @@ const categories = [
 
 let active = "all";
 let keyword = "";
-let location = "";
+let jobLocation = "";
 
 function slug(s) {
   return String(s || "")
@@ -64,6 +63,10 @@ function slug(s) {
 
 function render() {
   const cards = document.getElementById("jobCards");
+  if (!cards) {
+    console.error('Element with id="jobCards" not found');
+    return;
+  }
 
   const shown = categories.filter(
     c => active === "all" || c.id === active
@@ -71,33 +74,28 @@ function render() {
 
   cards.innerHTML = shown.map(c => {
     const searchTerm = keyword || c.query;
-    const googleQuery =
-      `${searchTerm} jobs ${location || "India"}`;
-
+    const googleQuery = `${searchTerm} jobs ${jobLocation || "India"}`;
     const googleUrl =
       "https://www.google.com/search?q=" +
       encodeURIComponent(googleQuery);
 
-    const portalUrl = c.url(keyword, location);
+    const portalUrl = c.url(keyword, jobLocation);
 
     return `
       <article class="card">
         <div class="icon" aria-hidden="true">${c.icon}</div>
         <h3>${c.title}</h3>
         <p>${c.desc}</p>
-
         <div class="tags">
           ${c.tags.map(t => `<span class="tag">${t}</span>`).join("")}
         </div>
-
         <p>
-          <a href="${googleUrl}" target="_blank" rel="noopener">
+          <a href="${googleUrl}" target="_blank" rel="noopener noreferrer">
             🔎 Search on Google ↗
           </a>
         </p>
-
         <p>
-          <a href="${portalUrl}" target="_blank" rel="noopener">
+          <a href="${portalUrl}" target="_blank" rel="noopener noreferrer">
             💼 Search on Job Portal ↗
           </a>
         </p>
@@ -105,9 +103,9 @@ function render() {
     `;
   }).join("");
 
-  document.querySelectorAll(".filter").forEach(b =>
-    b.classList.toggle("active", b.dataset.category === active)
-  );
+  document.querySelectorAll(".filter").forEach(b => {
+    b.classList.toggle("active", b.dataset.category === active);
+  });
 }
 
 document.querySelectorAll(".filter").forEach(b => {
@@ -117,11 +115,16 @@ document.querySelectorAll(".filter").forEach(b => {
   });
 });
 
-document.getElementById("searchForm").addEventListener("submit", e => {
-  e.preventDefault();
-  keyword = document.getElementById("keyword").value.trim();
-  location = document.getElementById("location").value.trim();
-  render();
-});
+const searchForm = document.getElementById("searchForm");
+
+if (searchForm) {
+  searchForm.addEventListener("submit", e => {
+    e.preventDefault();
+    keyword = document.getElementById("keyword").value.trim();
+    jobLocation = document.getElementById("location").value.trim();
+    render();
+  });
+}
+
 console.log("Jobs script loaded");
 render();
