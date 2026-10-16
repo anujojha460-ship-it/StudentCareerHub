@@ -123,5 +123,5 @@ document.getElementById("searchForm").addEventListener("submit", e => {
   location = document.getElementById("location").value.trim();
   render();
 });
-
+console.log("Jobs script loaded");
 render();
