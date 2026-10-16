@@ -97,6 +97,18 @@ function render() {
         <p>
           <a href="${portalUrl}" target="_blank" rel="noopener noreferrer">
             💼 Search on Job Portal ↗
+            
+        <p>
+          <a
+            href="${portalUrl}"
+            target="_blank"
+            rel="noopener noreferrer"
+            style="display:inline-block;background:#16a34a;color:white;padding:10px 18px;border-radius:8px;text-decoration:none;font-weight:bold"
+          >
+            Apply Now →
+          </a>
+        </p>
+
           </a>
         </p>
       </article>
