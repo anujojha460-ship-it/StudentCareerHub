@@ -1,3 +1,4 @@
+
 const categories = [
   {
     id: "it",
@@ -63,6 +64,7 @@ function slug(s) {
 
 function render() {
   const cards = document.getElementById("jobCards");
+
   if (!cards) {
     console.error('Element with id="jobCards" not found');
     return;
@@ -74,7 +76,10 @@ function render() {
 
   cards.innerHTML = shown.map(c => {
     const searchTerm = keyword || c.query;
-    const googleQuery = `${searchTerm} jobs ${jobLocation || "India"}`;
+
+    const googleQuery =
+      `${searchTerm} jobs ${jobLocation || "India"}`;
+
     const googleUrl =
       "https://www.google.com/search?q=" +
       encodeURIComponent(googleQuery);
@@ -84,20 +89,35 @@ function render() {
     return `
       <article class="card">
         <div class="icon" aria-hidden="true">${c.icon}</div>
+
         <h3>${c.title}</h3>
+
         <p>${c.desc}</p>
+
         <div class="tags">
           ${c.tags.map(t => `<span class="tag">${t}</span>`).join("")}
         </div>
+
         <p>
-          <a href="${googleUrl}" target="_blank" rel="noopener noreferrer">
+          <a
+            href="${googleUrl}"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             🔎 Search on Google ↗
           </a>
         </p>
+
         <p>
-          <a href="${portalUrl}" target="_blank" rel="noopener noreferrer">
+          <a
+            href="${portalUrl}"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             💼 Search on Job Portal ↗
-            
+          </a>
+        </p>
+
         <p>
           <a
             href="${portalUrl}"
@@ -108,32 +128,39 @@ function render() {
             Apply Now →
           </a>
         </p>
-
-          </a>
-        </p>
       </article>
     `;
   }).join("");
 
-  document.querySelectorAll(".filter").forEach(b => {
-    b.classList.toggle("active", b.dataset.category === active);
+  document.querySelectorAll(".filter").forEach(button => {
+    button.classList.toggle(
+      "active",
+      button.dataset.category === active
+    );
   });
 }
 
-document.querySelectorAll(".filter").forEach(b => {
-  b.addEventListener("click", () => {
-    active = b.dataset.category;
+// Category buttons
+document.querySelectorAll(".filter").forEach(button => {
+  button.addEventListener("click", () => {
+    active = button.dataset.category;
     render();
   });
 });
 
+// Search form
 const searchForm = document.getElementById("searchForm");
 
 if (searchForm) {
-  searchForm.addEventListener("submit", e => {
-    e.preventDefault();
-    keyword = document.getElementById("keyword").value.trim();
-    jobLocation = document.getElementById("location").value.trim();
+  searchForm.addEventListener("submit", event => {
+    event.preventDefault();
+
+    keyword =
+      document.getElementById("keyword").value.trim();
+
+    jobLocation =
+      document.getElementById("location").value.trim();
+
     render();
   });
 }
