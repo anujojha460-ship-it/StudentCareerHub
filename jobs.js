@@ -1,1 +1,127 @@
-const categories=[{id:"it",title:"IT & Software Jobs",icon:"💻",desc:"Software developer, web developer, testing, support aur IT roles.",tags:["IT","Software","All India"],url:(k,l)=>`https://www.naukri.com/${slug(k||"it-jobs")}-jobs${l?`-in-${slug(l)}`:""}`},{id:"government",title:"Government Jobs",icon:"🏛️",desc:"Government vacancies aur recruitment notices official portal par check karein.",tags:["Government","Recruitment","India"],url:()=> "https://www.ncs.gov.in/"},{id:"sales",title:"Sales & Non-Technical",icon:"🤝",desc:"Sales executive, business development, customer support aur operations roles.",tags:["Sales","Non-IT","Entry level"],url:(k,l)=>`https://www.naukri.com/${slug(k||"sales-executive")}-jobs${l?`-in-${slug(l)}`:""}`},{id:"fresher",title:"Freshers & Internships",icon:"🎓",desc:"Freshers, trainee, internship aur entry-level opportunities.",tags:["Fresher","Internship","Entry level"],url:(k,l)=>!k&&!l?"https://internshala.com/internships/":`https://internshala.com/internships/${slug(k||"")}-internship${l?`/in-${slug(l)}`:""}`},{id:"remote",title:"Work From Home",icon:"🏠",desc:"Remote jobs aur work-from-home roles search karein.",tags:["Remote","WFH","Flexible"],url:(k,l)=>`https://www.linkedin.com/jobs/search/?keywords=${encodeURIComponent(k||"work from home")}&location=${encodeURIComponent(l||"India")}`}];let active="all",keyword="",location="";function slug(s){return String(s||"").toLowerCase().trim().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")}function render(){const cards=document.getElementById("jobCards");const shown=categories.filter(c=>active==="all"||c.id===active);cards.innerHTML=shown.map(c=>`<article class="card"><div class="icon" aria-hidden="true">${c.icon}</div><h3>${c.title}</h3><p>${c.desc}</p><div class="tags">${c.tags.map(t=>`<span class="tag">${t}</span>`).join("")}</div><a href="${c.url(keyword,location)}" target="_blank" rel="noopener">Search jobs ↗</a></article>`).join("");document.querySelectorAll(".filter").forEach(b=>b.classList.toggle("active",b.dataset.category===active))}document.querySelectorAll(".filter").forEach(b=>b.addEventListener("click",()=>{active=b.dataset.category;render()}));document.getElementById("searchForm").addEventListener("submit",e=>{e.preventDefault();keyword=document.getElementById("keyword").value.trim();location=document.getElementById("location").value.trim();render()});render();
+
+const categories = [
+  {
+    id: "it",
+    title: "IT & Software Jobs",
+    icon: "💻",
+    desc: "Software Developer, Web Developer, Testing aur IT jobs.",
+    tags: ["IT", "Software", "All India"],
+    query: "IT software jobs",
+    url: (k, l) =>
+      `https://www.naukri.com/${slug(k || "it-jobs")}-jobs${l ? `-in-${slug(l)}` : ""}`
+  },
+  {
+    id: "government",
+    title: "Government Jobs",
+    icon: "🏛️",
+    desc: "Sarkari Naukri, Railway, SSC aur government vacancies.",
+    tags: ["Government", "Recruitment", "India"],
+    query: "government jobs recruitment official notification",
+    url: () => "https://www.ncs.gov.in/"
+  },
+  {
+    id: "sales",
+    title: "Sales & Non-Technical",
+    icon: "🤝",
+    desc: "Sales, Business Development, Customer Support aur Operations.",
+    tags: ["Sales", "Non-IT", "Entry level"],
+    query: "sales customer support jobs",
+    url: (k, l) =>
+      `https://www.naukri.com/${slug(k || "sales-executive")}-jobs${l ? `-in-${slug(l)}` : ""}`
+  },
+  {
+    id: "fresher",
+    title: "Freshers & Internships",
+    icon: "🎓",
+    desc: "Freshers, Trainee, Internship aur entry-level jobs.",
+    tags: ["Fresher", "Internship", "Entry level"],
+    query: "fresher jobs internship",
+    url: () => "https://internshala.com/internships/"
+  },
+  {
+    id: "remote",
+    title: "Work From Home",
+    icon: "🏠",
+    desc: "Remote jobs aur Work From Home opportunities.",
+    tags: ["Remote", "WFH", "Flexible"],
+    query: "work from home remote jobs",
+    url: (k, l) =>
+      `https://www.linkedin.com/jobs/search/?keywords=${encodeURIComponent(k || "work from home")}&location=${encodeURIComponent(l || "India")}`
+  }
+];
+
+let active = "all";
+let keyword = "";
+let location = "";
+
+function slug(s) {
+  return String(s || "")
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
+function render() {
+  const cards = document.getElementById("jobCards");
+
+  const shown = categories.filter(
+    c => active === "all" || c.id === active
+  );
+
+  cards.innerHTML = shown.map(c => {
+    const searchTerm = keyword || c.query;
+    const googleQuery =
+      `${searchTerm} jobs ${location || "India"}`;
+
+    const googleUrl =
+      "https://www.google.com/search?q=" +
+      encodeURIComponent(googleQuery);
+
+    const portalUrl = c.url(keyword, location);
+
+    return `
+      <article class="card">
+        <div class="icon" aria-hidden="true">${c.icon}</div>
+        <h3>${c.title}</h3>
+        <p>${c.desc}</p>
+
+        <div class="tags">
+          ${c.tags.map(t => `<span class="tag">${t}</span>`).join("")}
+        </div>
+
+        <p>
+          <a href="${googleUrl}" target="_blank" rel="noopener">
+            🔎 Search on Google ↗
+          </a>
+        </p>
+
+        <p>
+          <a href="${portalUrl}" target="_blank" rel="noopener">
+            💼 Search on Job Portal ↗
+          </a>
+        </p>
+      </article>
+    `;
+  }).join("");
+
+  document.querySelectorAll(".filter").forEach(b =>
+    b.classList.toggle("active", b.dataset.category === active)
+  );
+}
+
+document.querySelectorAll(".filter").forEach(b => {
+  b.addEventListener("click", () => {
+    active = b.dataset.category;
+    render();
+  });
+});
+
+document.getElementById("searchForm").addEventListener("submit", e => {
+  e.preventDefault();
+  keyword = document.getElementById("keyword").value.trim();
+  location = document.getElementById("location").value.trim();
+  render();
+});
+
+render();
